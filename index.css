@@ -22,14 +22,14 @@ body {
   height: 400px;
   width: 400px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-template-columns: 100px 100px 100px 100px;
+  gap: 7px;
 }
 
 .grid {
   height: 100px;
   height: 100px;
-  border-radius: 10px;
+  border-radius: 7px;
   background-color: #FFC857;
   transition: all 0.3s;
   cursor: pointer;
