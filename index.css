@@ -1,0 +1,43 @@
+/* Reset */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Sizing */
+.container {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-color: #201A23;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game {
+  height: 400px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-row {
+  flex-grow: 1;
+  display: flex;
+}
+
+.grid {
+  flex-grow: 1;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: #FFC857;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+/* Interaction */
+.grid:hover {
+  background-color: #DB5A42;
+}
