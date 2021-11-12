@@ -1,10 +1,12 @@
 /* Reset */
+
 body {
   margin: 0;
   padding: 0;
 }
 
 /* Sizing */
+
 .container {
   height: 100vh;
   width: 100vw;
@@ -35,9 +37,57 @@ body {
   background-color: #FFC857;
   transition: all 0.3s;
   cursor: pointer;
+  opacity: 0.8;
 }
 
 /* Interaction */
+
 .grid:hover {
+  opacity: 1;
+}
+
+/* Game Actions */
+
+.grid.two {
+  background-color: #DB5A42;
+}
+
+.grid.four {
+  background-color: #DB5A42;
+}
+
+.grid.eight {
+  background-color: #DB5A42;
+}
+
+.grid.sixteen {
+  background-color: #DB5A42;
+}
+
+.grid.thrity-two {
+  background-color: #DB5A42;
+}
+
+.grid.sixty-four {
+  background-color: #DB5A42;
+}
+
+.grid.hundred-sixty-eight {
+  background-color: #DB5A42;
+}
+
+.grid.two-hundred-fifty-six {
+  background-color: #DB5A42;
+}
+
+.grid.five-hundred-twelve {
+  background-color: #DB5A42;
+}
+
+.grid.thousand-twenty-four {
+  background-color: #DB5A42;
+}
+
+.grid.two-thousand-fourty-eight {
   background-color: #DB5A42;
 }
