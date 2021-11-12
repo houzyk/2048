@@ -1,15 +1,15 @@
 const grids = document.querySelectorAll('.grid');
 
 // * Initialise
-const randomGame = Math.round(Math.random() * 15)
-grids[randomGame].dataset.game = 2;
-grids[randomGame].classList.add('two');
-let randomGame2 = Math.round(Math.random() * 15)
-while (randomGame === randomGame2) {
-  randomGame2 = Math.round(Math.random() * 15)
+let randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
+while (randomArray[0] === randomArray[1]) {
+  randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
 }
-grids[randomGame2].dataset.game = 2;
-grids[randomGame2].classList.add('two');
+randomArray.forEach((random) => {
+  grids[random].dataset.game = 2;
+  grids[random].classList.add('two');
+});
+
 
 const game = (key) => {
   if (key === "ArrowUp") {
