@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@900&display=swap');
 /* Reset */
 
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #5B5750;
+  font-size: 40px;
 }
 
 /* Sizing */
@@ -34,6 +38,9 @@ body {
   transition: all 0.3s;
   cursor: pointer;
   opacity: 0.8;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
 }
 
 /* Interaction */
@@ -44,46 +51,46 @@ body {
 
 /* Game Actions */
 
-.grid.two {
+.grid.index-2{
   background-color: #E2FDFF;
 }
 
-.grid.four {
+.grid.index-4{
   background-color: #DB5A42;
 }
 
-.grid.eight {
+.grid.index-8{
   background-color: #DB5A42;
 }
 
-.grid.sixteen {
+.grid.index-16{
   background-color: #DB5A42;
 }
 
-.grid.thrity-two {
+.grid.index-32{
   background-color: #DB5A42;
 }
 
-.grid.sixty-four {
+.grid.index-64{
   background-color: #DB5A42;
 }
 
-.grid.hundred-sixty-eight {
+.grid.index-128{
   background-color: #DB5A42;
 }
 
-.grid.two-hundred-fifty-six {
+.grid.index-256{
   background-color: #DB5A42;
 }
 
-.grid.five-hundred-twelve {
+.grid.index-512{
   background-color: #DB5A42;
 }
 
-.grid.thousand-twenty-four {
+.grid.index-1024{
   background-color: #DB5A42;
 }
 
-.grid.two-thousand-fourty-eight {
+.grid.index-2048{
   background-color: #DB5A42;
 }

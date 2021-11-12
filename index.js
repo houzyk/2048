@@ -1,14 +1,23 @@
 const grids = document.querySelectorAll('.grid');
 
 // * Initialise
+
+// ! Number Picker
+const numberPicker = (index, number) => {
+  grids[index].dataset.game = number;
+  grids[index].classList.add(`index-${number}`);
+  grids[index].innerText = number;
+}
+
+// ! Board Config
 let randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
 while (randomArray[0] === randomArray[1]) {
   randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
 }
 randomArray.forEach((random) => {
-  grids[random].dataset.game = 2;
-  grids[random].classList.add('two');
+  numberPicker(random, 2);
 });
+
 
 
 const game = (key) => {
