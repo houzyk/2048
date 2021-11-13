@@ -80,7 +80,7 @@ const arrowUp = () => {
   gameLogic();
 }
 const arrowDown = () => {
-  filterGrid().forEach((filteredGrid) => {
+  filterGrid().reverse().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
     const downCheck = ((filteredGridIndex < 12) && (grids[filteredGridIndex + 4].dataset.status === "nonactive"));
     while ( filteredGridIndex < 12 && (grids[filteredGridIndex + 4].dataset.status === "nonactive")) {
@@ -102,7 +102,7 @@ const arrowLeft = () => {
   gameLogic();
 }
 const arrowRight = () => {
-  filterGrid().forEach((filteredGrid) => {
+  filterGrid().reverse().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
     const leftCheck = ((filteredGridIndex !== 3 && filteredGridIndex !== 7 && filteredGridIndex !== 11 && filteredGridIndex !== 15) && (grids[filteredGridIndex + 1].dataset.status === "nonactive"));;
     while ( (filteredGridIndex !== 3 && filteredGridIndex !== 7 && filteredGridIndex !== 11 && filteredGridIndex !== 15) && (grids[filteredGridIndex + 1].dataset.status === "nonactive")) {
