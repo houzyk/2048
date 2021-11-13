@@ -39,26 +39,42 @@ const gameLogic = () => { // TODO
 }
 
 // ! Player Input Check
-const filterGrid = () => {
-  return Array.from(grids).filter(grid => grid.dataset.status === "active");
-} // Filters grid by active grids
+
+  // Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
+
+  const filterGrid = () => {
+    return Array.from(grids).filter(grid => grid.dataset.status === "active");
+  }
+
+  const afterMove = (filteredGrid, filteredGridIndex) => {
+    filteredGrid.innerText = "";
+    filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+    filteredGrid.dataset.status = "nonactive";
+    numberPicker(filteredGridIndex, filteredGrid.dataset.game);
+    filteredGrid.dataset.game = 0;
+  }
+
+  // Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
 
 const arrowUp = () => {
   filterGrid().forEach((filteredGrid) => {
-    const filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
-    if ( filteredGridIndex > 3) {
-      filteredGrid.innerText = "";
-      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
-      filteredGrid.dataset.status = "nonactive";
-      numberPicker(filteredGridIndex - 4, filteredGrid.dataset.game);
-      filteredGrid.dataset.game = 0;
+    let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
+    const upCheck = ((filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status !== "active"));
+    while ( (filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status !== "active")) {
+      filteredGridIndex -= 4;
     }
+    if (upCheck) afterMove(filteredGrid, filteredGridIndex);
   });
   gameLogic();
 }
 const arrowDown = () => { // TODO
   filterGrid().forEach((filteredGrid) => {
-
+    let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
+    const downCheck = ((filteredGridIndex < 12) && (grids[filteredGridIndex + 4].dataset.status !== "active"));
+    while ( filteredGridIndex < 12 && (grids[filteredGridIndex + 4].dataset.status !== "active")) {
+      filteredGridIndex += 4;
+    }
+    if (downCheck) afterMove(filteredGrid, filteredGridIndex);
   });
   gameLogic();
 }
