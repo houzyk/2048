@@ -15,6 +15,10 @@ let randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15
 while (randomArray[0] === randomArray[1]) {
   randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
 }
+grids.forEach(grid => {
+  grid.dataset.status = "nonactive";
+  grid.dataset.game = 0;
+});
 randomArray.forEach(random => numberPicker(random, 2));
 
 // * Game Play
@@ -54,39 +58,57 @@ const gameLogic = () => { // TODO
     filteredGrid.dataset.game = 0;
   }
 
+  // const gameMove = (filteredGrid, filteredGridIndex, positionCondition, moveNumber) => {
+  //   let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
+  //   const moveCheck = ((positionCondition) && (grids[filteredGridIndex + moveNumber].dataset.status !== "active"));
+  //   while ( (positionCondition) && (grids[filteredGridIndex + moveNumber].dataset.status !== "active")) {
+  //     filteredGridIndex += moveNumber;
+  //   }
+  //   if (moveCheck) afterMove(filteredGrid, filteredGridIndex);
+  // }
   // Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
 
 const arrowUp = () => {
   filterGrid().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
-    const upCheck = ((filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status !== "active"));
-    while ( (filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status !== "active")) {
+    const upCheck = ((filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive"));
+    while ( (filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive")) {
       filteredGridIndex -= 4;
     }
     if (upCheck) afterMove(filteredGrid, filteredGridIndex);
   });
   gameLogic();
 }
-const arrowDown = () => { // TODO
+const arrowDown = () => {
   filterGrid().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
-    const downCheck = ((filteredGridIndex < 12) && (grids[filteredGridIndex + 4].dataset.status !== "active"));
-    while ( filteredGridIndex < 12 && (grids[filteredGridIndex + 4].dataset.status !== "active")) {
+    const downCheck = ((filteredGridIndex < 12) && (grids[filteredGridIndex + 4].dataset.status === "nonactive"));
+    while ( filteredGridIndex < 12 && (grids[filteredGridIndex + 4].dataset.status === "nonactive")) {
       filteredGridIndex += 4;
     }
     if (downCheck) afterMove(filteredGrid, filteredGridIndex);
   });
   gameLogic();
 }
-const arrowLeft = () => { // TODO
-  filterGrid().forEach((grfilteredGridid) => {
-
+const arrowLeft = () => {
+  filterGrid().forEach((filteredGrid) => {
+    let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
+    const leftCheck = ((filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive"));;
+    while ( (filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive")) {
+      filteredGridIndex -= 1;
+    }
+    if (leftCheck) afterMove(filteredGrid, filteredGridIndex);
   });
   gameLogic();
 }
-const arrowRight = () => { // TODO
+const arrowRight = () => {
   filterGrid().forEach((filteredGrid) => {
-
+    let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
+    const leftCheck = ((filteredGridIndex !== 3 && filteredGridIndex !== 7 && filteredGridIndex !== 11 && filteredGridIndex !== 15) && (grids[filteredGridIndex + 1].dataset.status === "nonactive"));;
+    while ( (filteredGridIndex !== 3 && filteredGridIndex !== 7 && filteredGridIndex !== 11 && filteredGridIndex !== 15) && (grids[filteredGridIndex + 1].dataset.status === "nonactive")) {
+      filteredGridIndex += 1;
+    }
+    if (leftCheck) afterMove(filteredGrid, filteredGridIndex);
   });
   gameLogic();
 }
