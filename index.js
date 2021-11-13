@@ -33,8 +33,6 @@ const tileGenerate = () => {
       while (randomArray[0] === randomArray[1]) {
       randomArray = [Math.round(Math.random() * (nonactiveGrids.length - 1)), Math.round(Math.random() * (nonactiveGrids.length - 1))]
     }
-      console.log(nonactiveGrids)
-      console.log(randomArray)
       randomArray.forEach(random => numberPicker(nonactiveGrids, random, 2));
     }
   }
@@ -66,7 +64,7 @@ const gameStatus = () => {
 
 // ! Game Logic
 const gameLogic = () => { // TODO
-  gameStatus();
+
 }
 
 // ! Player Input Check
@@ -100,8 +98,11 @@ const arrowUp = () => {
       turn += 1;
     }
   });
-  if (moveAllow) tileGenerate();
-  gameLogic();
+  if (moveAllow) {
+    gameLogic();
+    tileGenerate();
+  }
+  gameStatus();
 }
 
 const arrowDown = () => {
@@ -118,8 +119,11 @@ const arrowDown = () => {
       turn += 1;
     }
   });
-  if (moveAllow) tileGenerate();
-  gameLogic();
+  if (moveAllow) {
+    gameLogic();
+    tileGenerate();
+  }
+  gameStatus();
 }
 
 const arrowLeft = () => {
@@ -136,8 +140,11 @@ const arrowLeft = () => {
       turn += 1;
     }
   });
-  if (moveAllow) tileGenerate();
-  gameLogic();
+  if (moveAllow) {
+    gameLogic();
+    tileGenerate();
+  }
+  gameStatus();
 }
 
 const arrowRight = () => {
@@ -154,8 +161,11 @@ const arrowRight = () => {
       turn += 1;
     }
   });
-  if (moveAllow) tileGenerate();
-  gameLogic();
+  if (moveAllow) {
+    gameLogic();
+    tileGenerate();
+  }
+  gameStatus();
 }
 
 // ! Player Input Control

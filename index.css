@@ -35,7 +35,7 @@ body {
   height: 100px;
   border-radius: 7px;
   background-color: #FFC857;
-  transition: all 0.3s;
+  /* transition: all 0.3s; */
   cursor: pointer;
   opacity: 0.8;
   text-align: center;
@@ -51,46 +51,46 @@ body {
 
 /* Game Actions */
 
-.grid.index-2{
+.grid.index-2 {
+  background-color: #D3D0CB;
+}
+
+.grid.index-4 {
+  background-color: #FBFFFE;
+}
+
+.grid.index-8 {
   background-color: #E2FDFF;
 }
 
-.grid.index-4{
+.grid.index-16 {
+  background-color: #E9E3B4;
+}
+
+.grid.index-32 {
+  background-color: #FFE45E;
+}
+
+.grid.index-64 {
+  background-color: #F39B6D;
+}
+
+.grid.index-128 {
+  background-color: #A8763E;
+}
+
+.grid.index-256 {
   background-color: #DB5A42;
 }
 
-.grid.index-8{
-  background-color: #DB5A42;
+.grid.index-512 {
+  background-color: #D17A22;
 }
 
-.grid.index-16{
-  background-color: #DB5A42;
+.grid.index-1024 {
+  background-color: #5F021F;
 }
 
-.grid.index-32{
-  background-color: #DB5A42;
-}
-
-.grid.index-64{
-  background-color: #DB5A42;
-}
-
-.grid.index-128{
-  background-color: #DB5A42;
-}
-
-.grid.index-256{
-  background-color: #DB5A42;
-}
-
-.grid.index-512{
-  background-color: #DB5A42;
-}
-
-.grid.index-1024{
-  background-color: #DB5A42;
-}
-
-.grid.index-2048{
-  background-color: #DB5A42;
+.grid.index-2048 {
+  background-color: #660000;
 }
