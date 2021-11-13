@@ -39,16 +39,39 @@ const gameLogic = () => { // TODO
 }
 
 // ! Player Input Check
-const arrowUp = () => { // TODO
+const filterGrid = () => {
+  return Array.from(grids).filter(grid => grid.dataset.status === "active");
+} // Filters grid by active grids
+
+const arrowUp = () => {
+  filterGrid().forEach((filteredGrid) => {
+    const filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
+    if ( filteredGridIndex > 3) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      filteredGrid.dataset.status = "nonactive";
+      numberPicker(filteredGridIndex - 4, filteredGrid.dataset.game);
+      filteredGrid.dataset.game = 0;
+    }
+  });
   gameLogic();
 }
 const arrowDown = () => { // TODO
+  filterGrid().forEach((filteredGrid) => {
+
+  });
   gameLogic();
 }
 const arrowLeft = () => { // TODO
+  filterGrid().forEach((grfilteredGridid) => {
+
+  });
   gameLogic();
 }
 const arrowRight = () => { // TODO
+  filterGrid().forEach((filteredGrid) => {
+
+  });
   gameLogic();
 }
 
