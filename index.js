@@ -5,6 +5,7 @@ const grids = document.querySelectorAll('.grid');
 // ! Number Picker
 const numberPicker = (index, number) => {
   grids[index].dataset.game = number;
+  grids[index].dataset.status = "active";
   grids[index].classList.add(`index-${number}`);
   grids[index].innerText = number;
 }
@@ -16,19 +17,18 @@ while (randomArray[0] === randomArray[1]) {
 }
 randomArray.forEach(random => numberPicker(random, 2));
 
-
 // * Game Play
 
 // ! Game Status
-const gameStatus = () => { // TODO
-  const winCondition;
-  const loseCondition;
+const gameStatus = () => {
+  const winCondition = Array.from(grids).some(grid => grid.dataset.game === "2048");
+  const loseCondition = Array.from(grids).every(grid => grid.dataset.status === "active");
   if (winCondition) {
-    alert("You Win");
+    alert("You Win"); // TODO Refactor
     window.location.reload();
   }
   if (loseCondition) {
-    alert("You Lose");
+    alert("You Lose"); // TODO Refactor
     window.location.reload();
   }
 }
