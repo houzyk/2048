@@ -2,24 +2,51 @@ const grids = document.querySelectorAll('.grid');
 
 // * Game Init
 
+let turn = 1;
+
 // ! Number Picker
-const numberPicker = (index, number) => {
-  grids[index].dataset.game = number;
-  grids[index].dataset.status = "active";
-  grids[index].classList.add(`index-${number}`);
-  grids[index].innerText = number;
+const numberPicker = (grid, index, number) => {
+  grid[index].dataset.game = number;
+  grid[index].dataset.status = "active";
+  grid[index].classList.add(`index-${number}`);
+  grid[index].innerText = number;
+}
+
+// ! Tile Generator
+const tileGenerate = () => {
+  if (turn === 1) {
+    let randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
+    while (randomArray[0] === randomArray[1]) {
+      randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
+    }
+    randomArray.forEach(random => numberPicker(grids, random, 2));
+  } else {
+    const nonactiveGrids = Array.from(grids).filter(grid => grid.dataset.status === "nonactive");
+    if (nonactiveGrids.length === 1) {
+      numberPicker(nonactiveGrids, 0, 2)
+    } else if (nonactiveGrids.length === 2) {
+      console.log(nonactiveGrids)
+      numberPicker(nonactiveGrids, 0, 2)
+      numberPicker(nonactiveGrids, 1, 2)
+    } else {
+      let randomArray = [Math.round(Math.random() * (nonactiveGrids.length - 1)), Math.round(Math.random() * (nonactiveGrids.length - 1))]
+      while (randomArray[0] === randomArray[1]) {
+      randomArray = [Math.round(Math.random() * (nonactiveGrids.length - 1)), Math.round(Math.random() * (nonactiveGrids.length - 1))]
+    }
+      console.log(nonactiveGrids)
+      console.log(randomArray)
+      randomArray.forEach(random => numberPicker(nonactiveGrids, random, 2));
+    }
+  }
 }
 
 // ! Board Config
-let randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
-while (randomArray[0] === randomArray[1]) {
-  randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
-}
 grids.forEach(grid => {
-  grid.dataset.status = "nonactive";
-  grid.dataset.game = 0;
-});
-randomArray.forEach(random => numberPicker(random, 2));
+    grid.dataset.status = "nonactive";
+    grid.dataset.game = 0;
+  });
+tileGenerate();
+
 
 // * Game Play
 
@@ -45,71 +72,89 @@ const gameLogic = () => { // TODO
 // ! Player Input Check
 
   // Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
-
-  const filterGrid = () => {
+  const filterActiveGrid = () => {
     return Array.from(grids).filter(grid => grid.dataset.status === "active");
   }
 
   const afterMove = (filteredGrid, filteredGridIndex) => {
     filteredGrid.innerText = "";
     filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
-    filteredGrid.dataset.status = "nonactive";
-    numberPicker(filteredGridIndex, filteredGrid.dataset.game);
+    numberPicker(grids, filteredGridIndex, filteredGrid.dataset.game);
     filteredGrid.dataset.game = 0;
+    filteredGrid.dataset.status = "nonactive";
   }
-
-  // const gameMove = (filteredGrid, filteredGridIndex, positionCondition, moveNumber) => {
-  //   let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
-  //   const moveCheck = ((positionCondition) && (grids[filteredGridIndex + moveNumber].dataset.status !== "active"));
-  //   while ( (positionCondition) && (grids[filteredGridIndex + moveNumber].dataset.status !== "active")) {
-  //     filteredGridIndex += moveNumber;
-  //   }
-  //   if (moveCheck) afterMove(filteredGrid, filteredGridIndex);
-  // }
   // Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
 
+// TODO REFACTOR
 const arrowUp = () => {
-  filterGrid().forEach((filteredGrid) => {
+  let moveAllow = false;
+  filterActiveGrid().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
     const upCheck = ((filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive"));
     while ( (filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive")) {
       filteredGridIndex -= 4;
     }
-    if (upCheck) afterMove(filteredGrid, filteredGridIndex);
+    if (upCheck) {
+      afterMove(filteredGrid, filteredGridIndex);
+      moveAllow = true;
+      turn += 1;
+    }
   });
+  if (moveAllow) tileGenerate();
   gameLogic();
 }
+
 const arrowDown = () => {
-  filterGrid().reverse().forEach((filteredGrid) => {
+  let moveAllow = false;
+  filterActiveGrid().reverse().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
     const downCheck = ((filteredGridIndex < 12) && (grids[filteredGridIndex + 4].dataset.status === "nonactive"));
     while ( filteredGridIndex < 12 && (grids[filteredGridIndex + 4].dataset.status === "nonactive")) {
       filteredGridIndex += 4;
     }
-    if (downCheck) afterMove(filteredGrid, filteredGridIndex);
+    if (downCheck){
+      afterMove(filteredGrid, filteredGridIndex);
+      moveAllow = true;
+      turn += 1;
+    }
   });
+  if (moveAllow) tileGenerate();
   gameLogic();
 }
+
 const arrowLeft = () => {
-  filterGrid().forEach((filteredGrid) => {
+  let moveAllow = false;
+  filterActiveGrid().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
     const leftCheck = ((filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive"));;
     while ( (filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive")) {
       filteredGridIndex -= 1;
     }
-    if (leftCheck) afterMove(filteredGrid, filteredGridIndex);
+    if (leftCheck) {
+      afterMove(filteredGrid, filteredGridIndex);
+      moveAllow = true;
+      turn += 1;
+    }
   });
+  if (moveAllow) tileGenerate();
   gameLogic();
 }
+
 const arrowRight = () => {
-  filterGrid().reverse().forEach((filteredGrid) => {
+  let moveAllow = false;
+  filterActiveGrid().reverse().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
     const leftCheck = ((filteredGridIndex !== 3 && filteredGridIndex !== 7 && filteredGridIndex !== 11 && filteredGridIndex !== 15) && (grids[filteredGridIndex + 1].dataset.status === "nonactive"));;
     while ( (filteredGridIndex !== 3 && filteredGridIndex !== 7 && filteredGridIndex !== 11 && filteredGridIndex !== 15) && (grids[filteredGridIndex + 1].dataset.status === "nonactive")) {
       filteredGridIndex += 1;
     }
-    if (leftCheck) afterMove(filteredGrid, filteredGridIndex);
+    if (leftCheck) {
+      afterMove(filteredGrid, filteredGridIndex);
+      moveAllow = true;
+      turn += 1;
+    }
   });
+  if (moveAllow) tileGenerate();
   gameLogic();
 }
 
