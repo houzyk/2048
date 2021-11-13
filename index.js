@@ -1,6 +1,6 @@
 const grids = document.querySelectorAll('.grid');
 
-// * Game Initialise
+// * Game Init
 
 // ! Number Picker
 const numberPicker = (index, number) => {
@@ -19,13 +19,40 @@ randomArray.forEach(random => numberPicker(random, 2));
 
 // * Game Play
 
-// ! Flow Checkers
-const arrowUp = () => {} // TODO
-const arrowDown = () => {} // TODO
-const arrowLeft = () => {} // TODO
-const arrowRight = () => {} // TODO
+// ! Game Status
+const gameStatus = () => { // TODO
+  const winCondition;
+  const loseCondition;
+  if (winCondition) {
+    alert("You Win");
+    window.location.reload();
+  }
+  if (loseCondition) {
+    alert("You Lose");
+    window.location.reload();
+  }
+}
 
-// ! Flow Control
+// ! Game Logic
+const gameLogic = () => { // TODO
+  gameStatus();
+}
+
+// ! Player Input Check
+const arrowUp = () => { // TODO
+  gameLogic();
+}
+const arrowDown = () => { // TODO
+  gameLogic();
+}
+const arrowLeft = () => { // TODO
+  gameLogic();
+}
+const arrowRight = () => { // TODO
+  gameLogic();
+}
+
+// ! Player Input Control
 const game = (key) => {
   if (key === "ArrowUp") arrowUp();
   if (key === "ArrowDown") arrowDown();
@@ -33,4 +60,5 @@ const game = (key) => {
   if (key === "ArrowRight") arrowRight();
 }
 
+// ! Player Listener
 window.addEventListener('keyup', event => game(event.key));
