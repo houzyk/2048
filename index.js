@@ -21,16 +21,16 @@ randomArray.forEach(random => numberPicker(random, 2));
 
 // ! Game Status
 const gameStatus = () => {
-  const winCondition = Array.from(grids).some(grid => grid.dataset.game === "2048");
-  const loseCondition = Array.from(grids).every(grid => grid.dataset.status === "active");
-  if (winCondition) {
-    alert("You Win"); // TODO Refactor
-    window.location.reload();
+  const winCondition = [Array.from(grids).some(grid => grid.dataset.game === "2048"), "Nice! You Win."];
+  const loseCondition = [Array.from(grids).every(grid => grid.dataset.status === "active"), "Sorry, Try Again..."];
+  const gameEnd = (message) => {
+    setTimeout(() => {
+      alert(`${message}`);
+      window.location.reload();
+    }, 500);
   }
-  if (loseCondition) {
-    alert("You Lose"); // TODO Refactor
-    window.location.reload();
-  }
+  if (winCondition[0]) gameEnd(winCondition[1]);
+  if (loseCondition[0]) gameEnd(loseCondition[1]);
 }
 
 // ! Game Logic
