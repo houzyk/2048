@@ -200,11 +200,46 @@ const arrowLeft = () => {
   let moveAllow = false;
   filterActiveGrid().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
-    const leftCheck = ((filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive"));;
-    while ( (filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive")) {
-      filteredGridIndex -= 1;
-    }
-    if (leftCheck) {
+    if ((filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex].dataset.game === grids[filteredGridIndex - 1].dataset.game)) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 1].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 1].dataset.status = "active";
+      grids[filteredGridIndex - 1].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 1].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex - 1].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12 && filteredGridIndex !== 1 && filteredGridIndex !== 5 && filteredGridIndex !== 9 && filteredGridIndex !== 13) && (grids[filteredGridIndex].dataset.game === grids[filteredGridIndex - 2].dataset.game)) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 2].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 2].dataset.status = "active";
+      grids[filteredGridIndex - 2].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 2].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex - 2].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12 && filteredGridIndex !== 1 && filteredGridIndex !== 5 && filteredGridIndex !== 9 && filteredGridIndex !== 13 && filteredGridIndex !== 2 && filteredGridIndex !== 6 && filteredGridIndex !== 10 && filteredGridIndex !== 14) && (grids[filteredGridIndex].dataset.game === grids[filteredGridIndex - 3].dataset.game)) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 3].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 3].dataset.status = "active";
+      grids[filteredGridIndex - 3].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 3].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex - 3].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive")) {
+      while ( (filteredGridIndex !== 0 && filteredGridIndex !== 4 && filteredGridIndex !== 8 && filteredGridIndex !== 12) && (grids[filteredGridIndex - 1].dataset.status === "nonactive")) {
+        filteredGridIndex -= 1;
+      }
       afterMove(filteredGrid, filteredGridIndex);
       moveAllow = true;
       turn += 1;
