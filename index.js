@@ -69,7 +69,7 @@ const gameLogic = () => { // TODO
 
 // ! Player Input Check
 
-  // Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
+// Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
   const filterActiveGrid = () => {
     return Array.from(grids).filter(grid => grid.dataset.status === "active");
   }
@@ -81,18 +81,53 @@ const gameLogic = () => { // TODO
     filteredGrid.dataset.game = 0;
     filteredGrid.dataset.status = "nonactive";
   }
-  // Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
+// Helpers \/\/\/\/\/\/\/\/\/\/\/\/\/
 
 // TODO REFACTOR
 const arrowUp = () => {
   let moveAllow = false;
   filterActiveGrid().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
-    const upCheck = ((filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive"));
-    while ( (filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive")) {
-      filteredGridIndex -= 4;
-    }
-    if (upCheck) {
+    if ((filteredGridIndex > 3) && (grids[filteredGridIndex].dataset.game === grids[filteredGridIndex - 4].dataset.game)) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 4].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 4].dataset.status = "active";
+      grids[filteredGridIndex - 4].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 4].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex - 4].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex > 7) && (grids[filteredGridIndex].dataset.game === grids[filteredGridIndex - 8].dataset.game)) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 8].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 8].dataset.status = "active";
+      grids[filteredGridIndex - 8].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 8].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex - 8].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex > 11) && (grids[filteredGridIndex].dataset.game) === grids[filteredGridIndex - 12].dataset.game) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 12].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 12].dataset.status = "active";
+      grids[filteredGridIndex - 12].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex - 12].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex - 12].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive")) {
+      while ( (filteredGridIndex > 3) && (grids[filteredGridIndex - 4].dataset.status === "nonactive")) {
+        filteredGridIndex -= 4;
+      }
       afterMove(filteredGrid, filteredGridIndex);
       moveAllow = true;
       turn += 1;
@@ -109,11 +144,46 @@ const arrowDown = () => {
   let moveAllow = false;
   filterActiveGrid().reverse().forEach((filteredGrid) => {
     let filteredGridIndex = Array.from(grids).findIndex(grid => grid === filteredGrid);
-    const downCheck = ((filteredGridIndex < 12) && (grids[filteredGridIndex + 4].dataset.status === "nonactive"));
-    while ( filteredGridIndex < 12 && (grids[filteredGridIndex + 4].dataset.status === "nonactive")) {
-      filteredGridIndex += 4;
-    }
-    if (downCheck){
+    if ((filteredGridIndex < 12) && (grids[filteredGridIndex].dataset.game === grids[filteredGridIndex + 4].dataset.game)) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex + 4].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 4].dataset.status = "active";
+      grids[filteredGridIndex + 4].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex + 4].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex + 4].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex < 8) && (grids[filteredGridIndex].dataset.game === grids[filteredGridIndex + 8].dataset.game)) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex + 8].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 8].dataset.status = "active";
+      grids[filteredGridIndex + 8].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex + 8].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex + 8].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if ((filteredGridIndex < 4) && (grids[filteredGridIndex].dataset.game) === grids[filteredGridIndex + 12].dataset.game) {
+      filteredGrid.innerText = "";
+      filteredGrid.classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex + 12].dataset.game = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 12].dataset.status = "active";
+      grids[filteredGridIndex + 12].classList.remove(`index-${filteredGrid.dataset.game}`);
+      grids[filteredGridIndex + 12].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
+      grids[filteredGridIndex + 12].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      filteredGrid.dataset.game = 0;
+      filteredGrid.dataset.status = "nonactive";
+      moveAllow = true;
+      turn += 1;
+    } else if (((filteredGridIndex < 12) && (grids[filteredGridIndex + 4].dataset.status === "nonactive"))) {
+      while ( filteredGridIndex < 12 && (grids[filteredGridIndex + 4].dataset.status === "nonactive")) {
+        filteredGridIndex += 4;
+      }
       afterMove(filteredGrid, filteredGridIndex);
       moveAllow = true;
       turn += 1;
