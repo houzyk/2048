@@ -19,21 +19,44 @@ const tileGenerate = () => {
     while (randomArray[0] === randomArray[1]) {
       randomArray = [Math.round(Math.random() * 15), Math.round(Math.random() * 15)]
     }
-    randomArray.forEach(random => numberPicker(grids, random, 2));
+    randomArray.forEach(random => {
+      numberPicker(grids, random, 2);
+      grids[random].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[random].style.transform = "";
+      }, 100);
+    });
   } else {
     const nonactiveGrids = Array.from(grids).filter(grid => grid.dataset.status === "nonactive");
     if (nonactiveGrids.length === 1) {
       numberPicker(nonactiveGrids, 0, 2)
+      nonactiveGrids[0].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        nonactiveGrids[0].style.transform = "";
+      }, 100);
     } else if (nonactiveGrids.length === 2) {
-      console.log(nonactiveGrids)
       numberPicker(nonactiveGrids, 0, 2)
+      nonactiveGrids[0].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        nonactiveGrids[0].style.transform = "";
+      }, 100);
       numberPicker(nonactiveGrids, 1, 2)
+      nonactiveGrids[1].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        nonactiveGrids[1].style.transform = "";
+      }, 100);
     } else {
       let randomArray = [Math.round(Math.random() * (nonactiveGrids.length - 1)), Math.round(Math.random() * (nonactiveGrids.length - 1))]
       while (randomArray[0] === randomArray[1]) {
       randomArray = [Math.round(Math.random() * (nonactiveGrids.length - 1)), Math.round(Math.random() * (nonactiveGrids.length - 1))]
     }
-      randomArray.forEach(random => numberPicker(nonactiveGrids, random, 2));
+      randomArray.forEach(random => {
+        numberPicker(nonactiveGrids, random, 2);
+        nonactiveGrids[random].style.transform = "scale(1.05)";
+        setTimeout(() => {
+          nonactiveGrids[random].style.transform = "";
+        }, 100);
+      });
     }
   }
 }
@@ -96,6 +119,10 @@ const arrowUp = () => {
       grids[filteredGridIndex - 4].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex - 4].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex - 4].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 4].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex - 4].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -108,6 +135,10 @@ const arrowUp = () => {
       grids[filteredGridIndex - 8].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex - 8].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex - 8].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 8].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex - 8].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -120,6 +151,10 @@ const arrowUp = () => {
       grids[filteredGridIndex - 12].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex - 12].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex - 12].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 12].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex - 12].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -152,6 +187,10 @@ const arrowDown = () => {
       grids[filteredGridIndex + 4].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex + 4].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex + 4].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 4].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex + 4].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -164,6 +203,10 @@ const arrowDown = () => {
       grids[filteredGridIndex + 8].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex + 8].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex + 8].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 8].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex + 8].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -176,6 +219,10 @@ const arrowDown = () => {
       grids[filteredGridIndex + 12].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex + 12].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex + 12].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 12].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex + 12].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -208,6 +255,10 @@ const arrowLeft = () => {
       grids[filteredGridIndex - 1].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex - 1].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex - 1].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 1].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex - 1].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -220,6 +271,10 @@ const arrowLeft = () => {
       grids[filteredGridIndex - 2].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex - 2].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex - 2].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 2].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex - 2].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -232,6 +287,10 @@ const arrowLeft = () => {
       grids[filteredGridIndex - 3].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex - 3].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex - 3].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex - 3].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex - 3].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -264,6 +323,10 @@ const arrowRight = () => {
       grids[filteredGridIndex + 1].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex + 1].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex + 1].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 1].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex + 1].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -276,6 +339,10 @@ const arrowRight = () => {
       grids[filteredGridIndex + 2].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex + 2].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex + 2].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 2].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex + 2].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
@@ -288,6 +355,10 @@ const arrowRight = () => {
       grids[filteredGridIndex + 3].classList.remove(`index-${filteredGrid.dataset.game}`);
       grids[filteredGridIndex + 3].classList.add(`index-${parseInt(filteredGrid.dataset.game, 10) * 2}`);
       grids[filteredGridIndex + 3].innerText = parseInt(filteredGrid.dataset.game, 10) * 2;
+      grids[filteredGridIndex + 3].style.transform = "scale(1.05)";
+      setTimeout(() => {
+        grids[filteredGridIndex + 3].style.transform = "";
+      }, 100);
       filteredGrid.dataset.game = 0;
       filteredGrid.dataset.status = "nonactive";
       moveAllow = true;
